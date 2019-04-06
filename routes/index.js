@@ -25,14 +25,19 @@ router.post("/register", function (req, res) {
             console.log("User logged:" + user.username)
             res.redirect("/list")
         })
-
-
     })
 })
 
 //login route 
 router.get("/login", function (req, res) {
     res.render("login");
+});
+
+router.post("/login", passport.authenticate("local", {
+    successRedirect: "/list",
+    failureRedirect: "/login"
+}), function(req, res) {
+
 });
 
 
