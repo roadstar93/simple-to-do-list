@@ -4,7 +4,9 @@ var express = require("express"),
     app = express();
 
 
-var indexRoutes = require("./routes/index");
+var indexRoutes = require("./routes/index"),
+    listRoutes  = require("./routes/list");
+
 //App connection local or online
 var port = process.env.PORT || 5000;
 var ip = process.env.IP || "0.0.0.0";
@@ -12,6 +14,7 @@ var ip = process.env.IP || "0.0.0.0";
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(indexRoutes);
+app.use(listRoutes);
 
 
 
