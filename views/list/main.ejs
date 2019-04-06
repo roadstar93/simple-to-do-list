@@ -3,10 +3,9 @@
 <h1>Lists page</h1>
 
 <ul>
-    <li>Stuff</li>
-    <li>Stuff</li>
-    <li>Stuff</li>
-    <li>Stuff</li>
+    <% users.forEach(function(user){ %>
+    <li><%= user.toDo %></li>
+    <% }) %>
 </ul>
 
 
