@@ -5,13 +5,12 @@ var mongoose = require("mongoose"),
 var userSchema = new mongoose.Schema({
     username: String,
     password: String,
-    toDo: String
-    // toDo: [
-    //     {
-    //         type: mongoose.Schema.Types.ObjectId,
-    //         ref: "List"
-    //     }
-    // ]
+    items: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Item"
+        }
+    ] 
 });
 
 userSchema.plugin(passportLocalMongoose); //Using passport for authentication
