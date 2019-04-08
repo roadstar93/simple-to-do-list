@@ -1,0 +1,12 @@
+<% include ../partials/header %>
+
+<h1>Edit form</h1>
+
+<form action="/list/<%= item._id %>?_method=PUT" method="post">
+    <input type="text" name="text" value="<%= item.text %>">
+    <input type="submit" value="Update">
+</form>
+
+
+
+<% include ../partials/footer %>
