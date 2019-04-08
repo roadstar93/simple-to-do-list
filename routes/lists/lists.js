@@ -8,7 +8,7 @@ var express = require("express"),
 router.get("/list", function (req, res) {
     User.findById(req.user._id).populate("items").exec(function (err, user) {
         if (err) {
-            res.send("Blog not found");
+            res.send("Cannot find user");
         } else {
             // console.log(user.item)
             res.render("list/main", { user: user });
@@ -16,12 +16,6 @@ router.get("/list", function (req, res) {
     })
 })
     
-
-//List add get route
-router.get("/list/new", function (req, res) {
-    res.render("list/create")
-})
-
 
 //List post route
 router.post("/list", function (req, res) {
@@ -48,7 +42,7 @@ router.post("/list", function (req, res) {
                 foundUser.items.push(item);
                 foundUser.save();
                 // console.log(foundUser)
-                res.redirect("/")
+                res.redirect("/list")
                }
            })
        }

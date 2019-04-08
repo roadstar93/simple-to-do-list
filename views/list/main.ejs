@@ -4,10 +4,17 @@
 
 <ul>
     <% user.items.forEach(function(list) { %>
-        <li><%= list.text %></li>
+        <li><%= list.text %> <span><a href="#">Edit</a> <a href="#">Delete</a></span></li>
     <% }) %>
 
 </ul>
+
+<h1>Add new item</h1>
+
+<form action="/list" method="post">
+    <input type="text" name="text" placeholder="item">
+    <input type="Submit" value="Add item">
+</form>
 
 <a href="/logout">Logout</a>
 
