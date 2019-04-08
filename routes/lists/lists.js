@@ -19,7 +19,6 @@ router.get("/list", function (req, res) {
 
 //List create route
 router.post("/list", function (req, res) {
-    console.log(req.user._id)
     User.findById(req.user._id, function (err, foundUser) {
         if (err) {
             console.log("cannot find user")
@@ -34,9 +33,7 @@ router.post("/list", function (req, res) {
                 if (err) {
                     console.log("cannot add item")
                 } else {
-                    //    item.author.id = req.user._id
-                    //item.author.username = req.user.username;
-                    console.log(item.text)
+
                     item.save();
 
                     foundUser.items.push(item);
@@ -67,6 +64,18 @@ router.put("/list/:id", function (req, res) {
     Item.findByIdAndUpdate(req.params.id, { text: text }, function (err, updatedItem) {
         if (err) {
             console.log("Could not update item")
+        } else {
+            res.redirect("/list")
+        }
+    })
+})
+
+
+//Delete route
+router.delete("/list/:id", function(req, res){
+    Item.findByIdAndDelete(req.params.id, function(err){
+        if(err) {
+            console.log("File could not be deleted")
         } else {
             res.redirect("/list")
         }
