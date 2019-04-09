@@ -1,14 +1,28 @@
 <% include partials/header %>
 
-<h1>Log in page</h1>
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card" style="max-width:25rem">
+            <div class="card-body">
+                <h4 class="card-title">Login</h4>
+                <form action="/login" method="post">
+                    <p>
+                        <div class="form-group">
+                            <label for="inputUsername" class="mb-0">Username</label>
+                            <input type="text" class="form-control mb-3" id="inputUsername" placeholder="Enter username"
+                                name="username">
+                            <label for="InputPassword" class="mb-0">Password</label>
+                            <input type="password" class="form-control mb-3" id="InputPassword" placeholder="Password"
+                                name="password">
+                        </div>
+                    </p>
+                    <p class="text-right"><input type="submit" value="Log in" class="btn btn-primary"></p>
+                    <a href="/" class="align-self-start">Go home</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-<form action="/login" method="post">
-    <input type="text" placeholder="username" name="username">
-    <input type="password" name="password" placeholder="password">
-    <input type="submit" value="Log in">
-</form>
-
-
-<a href="/">Go home</a>
 
 <% include partials/footer %>
