@@ -1,5 +1,10 @@
 <% include ../partials/header %>
 
+<form action="/list" method="post">
+    <input type="text" name="text" placeholder="item">
+    <input type="Submit" value="Add item">
+</form>
+
 <div class="row ">
     <div class="col-md-6 mx-auto">
         <div class="card border-primary mb-3" id="list-card ">
@@ -8,7 +13,7 @@
                 <div class="">
                     <% user.items.forEach(function(list) { %>
                     <li>
-                            <!--This will be added after jQuerry is implemented for changing the class <i class="far fa-check-circle"></i> <%= list.text %> -->
+                            <!--This will be added after jQuerry is implemented for changing the class <i class="far fa-check-circle"></i> --><%= list.text %> 
                     </li>
                     <a class="btn btn-sm btn-primary" href="/list/<%=list._id %>/edit">Edit</a>
                     <form action="/list/<%=list._id%>?_method=DELETE" method="post" style="display:inline">
@@ -24,10 +29,7 @@
 
 <h1>Add new item</h1>
 
-<form action="/list" method="post">
-    <input type="text" name="text" placeholder="item">
-    <input type="Submit" value="Add item">
-</form>
+
 
 
 <% include ../partials/footer %>
