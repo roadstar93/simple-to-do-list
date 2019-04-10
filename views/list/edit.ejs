@@ -1,11 +1,23 @@
 <% include ../partials/header %>
 
-<h1>Edit form</h1>
-
-<form action="/list/<%= item._id %>?_method=PUT" method="post">
-    <input type="text" name="text" value="<%= item.text %>">
-    <input type="submit" value="Update">
-</form>
+<div class="row ">
+    <div class="col-md-6 mx-auto">
+        <div class="card border-primary mb-3" id="list-card ">
+            <div class="card-header">Edit to-do</div>
+            <div class="card-body">
+                <form action="/list/<%= item._id %>?_method=PUT" method="post">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Add new to-do" aria-label="Add item"
+                            aria-describedby="basic-addon2" name="text" value="<%= item.text %>" required>
+                        <div class="input-group-append">
+                            <input class="btn btn-primary" type="submit" value="Update">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
