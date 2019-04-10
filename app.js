@@ -6,9 +6,10 @@ var express = require("express"),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
     User = require("./models/users"),
+    flash = require("connect-flash"),
     app = express();
 
-
+//Route declaration
 var indexRoutes = require("./routes/index"),
     listRoutes  = require("./routes/lists/lists");
 
@@ -26,6 +27,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
+app.use(flash());
 
 //passport configuration
 app.use(require("express-session")({
@@ -42,6 +44,8 @@ passport.deserializeUser(User.deserializeUser());
 
 //middleware to pass user data
 app.use(function(req, res, next){
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     res.locals.currentUser = req.user;
     next();
 })

@@ -19,15 +19,16 @@ router.post("/register", function (req, res) {
     var newUser = new User({ username: req.body.username })
     User.register(newUser, req.body.password, function (err, user) {
         if (err) {
-            console.log(err)
-            res.redirect("/login")
+            console.log(err.message);
+            req.flash("error", err.message);
+            res.redirect("/register");
         }
         passport.authenticate("local")(req, res, function () {
-            console.log("User logged:" + user.username)
-            res.redirect("/list")
-        })
-    })
-})
+            req.flash("success", "You have successfully signed in");
+            res.redirect("/list");
+        });
+    });
+});
 
 //login route 
 router.get("/login", function (req, res) {
@@ -45,8 +46,8 @@ router.post("/login", passport.authenticate("local", {
 //logout route
 router.get("/logout", function (req, res) {
     req.logout();
-    console.log("Successfully logged out");
-    res.redirect("/")
+    req.flash("success", "You have been logged out")
+    res.redirect("/");
 });
 
 module.exports = router;
