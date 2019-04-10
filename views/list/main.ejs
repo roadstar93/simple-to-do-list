@@ -1,19 +1,25 @@
 <% include ../partials/header %>
 
-<form action="/list" method="post">
-    <input type="text" name="text" placeholder="item">
-    <input type="Submit" value="Add item">
-</form>
+
 
 <div class="row ">
     <div class="col-md-6 mx-auto">
         <div class="card border-primary mb-3" id="list-card ">
             <div class="card-header">To do items for <%=currentUser.username%></div>
+            <form action="/list" method="post">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Add new to-do"
+                        aria-label="Add item" aria-describedby="basic-addon2" name="text">
+                    <div class="input-group-append">
+                        <input class="btn btn-outline-primary" type="submit">
+                    </div>
+                </div>
+            </form>
             <div class="card-body">
                 <div class="">
                     <% user.items.forEach(function(list) { %>
                     <li>
-                            <!--This will be added after jQuerry is implemented for changing the class <i class="far fa-check-circle"></i> --><%= list.text %> 
+                        <!--This will be added after jQuerry is implemented for changing the class <i class="far fa-check-circle"></i> --><%= list.text %>
                     </li>
                     <a class="btn btn-sm btn-primary" href="/list/<%=list._id %>/edit">Edit</a>
                     <form action="/list/<%=list._id%>?_method=DELETE" method="post" style="display:inline">
@@ -27,7 +33,7 @@
     </div>
 </div>
 
-<h1>Add new item</h1>
+
 
 
 
