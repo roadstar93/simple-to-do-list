@@ -19,7 +19,7 @@
                 <ul>
                     <% user.items.forEach(function(list) { %>
                     <li class="">
-                        <!--This will be added after jQuerry is implemented for changing the class  --><%= list.text %>
+                        <%= list.text %>
                     </li>
                     <a class="btn btn-sm btn-primary" href="/list/<%=list._id %>/edit">Edit</a>
                     <form action="/list/<%=list._id%>?_method=DELETE" method="post" style="display:inline">
