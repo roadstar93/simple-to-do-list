@@ -16,10 +16,10 @@
                 </div>
             </form>
             <div class="card-body">
-                <div class="">
+                <ul>
                     <% user.items.forEach(function(list) { %>
-                    <li>
-                        <!--This will be added after jQuerry is implemented for changing the class <i class="far fa-check-circle"></i> --><%= list.text %>
+                    <li class="">
+                        <!--This will be added after jQuerry is implemented for changing the class  --><%= list.text %>
                     </li>
                     <a class="btn btn-sm btn-primary" href="/list/<%=list._id %>/edit">Edit</a>
                     <form action="/list/<%=list._id%>?_method=DELETE" method="post" style="display:inline">
@@ -27,7 +27,7 @@
                     </form>
                     <hr>
                     <% }) %>
-                </div>
+                </ul>
             </div>
         </div>
     </div>
