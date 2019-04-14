@@ -11,10 +11,12 @@ var express = require("express"),
 
 //Route declaration
 var indexRoutes = require("./routes/index"),
-    listRoutes  = require("./routes/lists/lists");
+    listRoutes = require("./routes/lists/lists");
 
-//mongodb connection -- local for now
-mongoose.connect("mongodb://localhost/to_do_list-temp1", {useNewUrlParser: true});
+//mongodb connection 
+var dbCloud;
+var dbConnection = dbCloud || "mongodb://localhost/to_do_list";
+mongoose.connect(dbConnection, { useNewUrlParser: true });
 
 //App connection local or online
 var port = process.env.PORT || 5000;
@@ -25,7 +27,7 @@ var ip = process.env.IP || "0.0.0.0";
 //app config
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(flash());
 
@@ -43,7 +45,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 //middleware to pass user data
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
     res.locals.currentUser = req.user;
@@ -54,6 +56,6 @@ app.use(function(req, res, next){
 app.use(indexRoutes);
 app.use(listRoutes);
 
-app.listen(port, ip, function(){
+app.listen(port, ip, function () {
     console.log("Server started")
 });
