@@ -63,13 +63,42 @@ router.put("/list/:id", function (req, res) {
     var text = req.body.text;
     Item.findByIdAndUpdate(req.params.id, { text: text }, function (err, updatedItem) {
         if (err) {
-            console.log("Could not update item");
+            req.flash("error", "Update failed: " + err.message);
+            res.redirect("/list")
         } else {
             req.flash("success", "Item updated");
             res.redirect("/list");
         }
     })
 })
+
+
+//Completed route
+router.put("/list/:id/done", function (req, res) {
+    Item.findById(req.params.id, function (err, foundItem) {
+        if (foundItem.completed === true) {
+            Item.findByIdAndUpdate(foundItem.id, { completed: false }, function (err, notCompletedItem) {
+                if (err) {
+                    req.flash("error", "Update failed: " + err.message);
+                    res.redirect("/list")
+                } else {
+                    req.flash("success", "Item not completed");
+                    res.redirect("/list");
+                };
+            });
+        } else {
+            Item.findByIdAndUpdate(foundItem.id, { completed: true }, function (err, completedItem) {
+                if (err) {
+                    req.flash("error", "Update failed: " + err.message);
+                    res.redirect("/list")
+                } else {
+                    req.flash("success", "Item completed");
+                    res.redirect("/list");
+                };
+            });
+        };
+    });
+});
 
 
 //Delete route
@@ -83,5 +112,15 @@ router.delete("/list/:id", function (req, res) {
         };
     });
 });
+
+function isCompleted(req, res, next) {
+    if (completed === false) {
+        { completed: true }
+    }
+    else {
+        { completed: false }
+    }
+    next();
+}
 
 module.exports = router;

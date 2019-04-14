@@ -19,9 +19,16 @@
                 <ul>
                     <% user.items.forEach(function(list) { %>
                     <li class="">
+                       <% if(list.completed === true) { %>
+                       <p class="crossed"><%= list.text %></p> 
+                       <% } else { %>
                         <%= list.text %>
+                    <% } %>
                     </li>
                     <a class="btn btn-sm btn-primary" href="/list/<%=list._id %>/edit">Edit</a>
+                    <form action="/list/<%=list._id%>/done?_method=PUT" method="post" style="display:inline">
+                        <button class="btn btn-sm btn-primary">Done</button>
+                    </form>
                     <form action="/list/<%=list._id%>?_method=DELETE" method="post" style="display:inline">
                         <button class="btn btn-sm btn-danger float-right">Delete</button>
                     </form>

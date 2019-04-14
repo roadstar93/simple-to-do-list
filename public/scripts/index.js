@@ -1,5 +1,5 @@
 
-
-$("ul").on("click", "li", function(){
-    $(this).toggleClass("crossed");
-});
+//Not needed anymore
+// $("ul").on("click", "li", function(){
+//     $(this).toggleClass("crossed");
+// });
