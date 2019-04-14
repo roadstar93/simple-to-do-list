@@ -15,8 +15,9 @@ var indexRoutes = require("./routes/index"),
 
 //mongodb connection 
 var dbCloud;
-var dbConnection = dbCloud || "mongodb://localhost/to_do_list";
+var dbConnection = process.env.dbCloud || "mongodb://localhost/to_do_list";
 mongoose.connect(dbConnection, { useNewUrlParser: true });
+
 
 //App connection local or online
 var port = process.env.PORT || 5000;
