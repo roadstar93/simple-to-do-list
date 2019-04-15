@@ -3,15 +3,15 @@
 
 
 <div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-5 mx-auto">
         <div class="card border-primary mb-3" id="list-card ">
             <div class="card-header">To do items for <%=currentUser.username%></div>
             <form action="/list" method="post">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Add new to-do"
-                        aria-label="Add item" aria-describedby="basic-addon2" name="text" required>
+                    <input type="text" class="form-control" placeholder="Add new to-do" aria-label="Add item"
+                        aria-describedby="basic-addon2" name="text" required>
                     <div class="input-group-append">
-                        <input class="btn btn-outline-primary" type="submit">
+                        <input class="btn btn-outline-primary" type="submit" value="Add">
                     </div>
                 </div>
             </form>
@@ -19,11 +19,9 @@
                 <ul>
                     <% user.items.forEach(function(list) { %>
                     <li class="">
-                       <% if(list.completed === true) { %>
-                       <p class="crossed"><%= list.text %></p> 
-                       <% } else { %>
-                        <%= list.text %>
-                    <% } %>
+                        <% if(list.completed === false) { %>
+                        <p><%= list.text %></p>
+
                     </li>
                     <a class="btn btn-sm btn-primary" href="/list/<%=list._id %>/edit">Edit</a>
                     <form action="/list/<%=list._id%>/done?_method=PUT" method="post" style="display:inline">
@@ -33,11 +31,38 @@
                         <button class="btn btn-sm btn-danger float-right">Delete</button>
                     </form>
                     <hr>
+                    <% } %>
                     <% }) %>
                 </ul>
             </div>
         </div>
     </div>
+
+    <div class="col-md-5 mx-auto">
+        <div class="card border-primary mb-3" id="list-card ">
+            <div class="card-header">Completed Items:</div>
+            <div class="card-body">
+                <ul>
+                    <% user.items.forEach(function(list) { %>
+                    <li class="">
+                        <% if(list.completed === true) { %>
+                        <p class="crossed"><%= list.text %></p>
+                    </li>
+                    <a class="btn btn-sm btn-primary" href="/list/<%=list._id %>/edit">Edit</a>
+                    <form action="/list/<%=list._id%>/done?_method=PUT" method="post" style="display:inline">
+                        <button class="btn btn-sm btn-primary">Not completed</button>
+                    </form>
+                    <form action="/list/<%=list._id%>?_method=DELETE" method="post" style="display:inline">
+                        <button class="btn btn-sm btn-danger float-right">Delete</button>
+                    </form>
+                    <hr>
+                    <% } %>
+                    <% }) %>
+                </ul>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
